@@ -1,7 +1,7 @@
 # Projet Réseau Social Web
 
 ## Description
-Projet de fin d'année : Réalisation d'un réseau social inspiré de Facebook en PHP natif et AJAX[cite: 3].
+Projet de fin d'année : Réalisation d'un réseau social inspiré de Facebook en PHP natif et AJAX.
 
 ## Membres du groupe
 - 
