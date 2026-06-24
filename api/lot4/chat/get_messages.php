@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-require_once '../config/db.php';
+require_once '../../config/db.php';
 
 // Le JS devra envoyer l'ID de l'utilisateur connecté et celui de l'ami avec qui il discute
 $sender_id = $_GET['sender_id'] ?? null;
@@ -16,7 +16,7 @@ if (!$sender_id || !$receiver_id) {
 try {
     // On récupère tous les messages échangés entre ces deux utilisateurs, triés par date
     // Remplace $bdd par $pdo si c'est le nom choisi dans config/db.php
-    $query = $bdd->prepare("
+    $query = $pdo->prepare("
         SELECT * FROM messages 
         WHERE (sender_id = ? AND receiver_id = ?) 
            OR (sender_id = ? AND receiver_id = ?) 

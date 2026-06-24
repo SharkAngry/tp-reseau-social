@@ -10,8 +10,8 @@ async function loadChatMessages() {
     try {
         // On utilise la fonction de tes camarades : apiRequest(endpoint, method, body, isFormData)
         // Comme c'est un GET, les paramètres passent dans l'URL
-        const response = await apiRequest(`chat/get_messages.php?sender_id=${currentUserId}&receiver_id=${currentReceiverId}`, "GET");
-
+        // Exemple d'ajustement dans tes appels JS :
+        const response = await apiRequest(`lot4/chat/get_messages.php?sender_id=${currentUserId}&receiver_id=${currentReceiverId}`, "GET");
         if (response.status === "success") {
             const messagesBox = document.getElementById("chat-messages-box");
             let htmlContent = "";
@@ -84,7 +84,7 @@ document.getElementById("chat-form").addEventListener("submit", async (e) => {
 
     try {
         // On appelle l'API via apiRequest en précisant true pour isFormData
-        const response = await apiRequest("chat/send_message.php", "POST", formData, true);
+        const response = await apiRequest("lot4/chat/send_message.php", "POST", formData, true);
 
         if (response.status === "success") {
             // Nettoyer les champs du formulaire
