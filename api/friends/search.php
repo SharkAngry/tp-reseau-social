@@ -3,35 +3,31 @@ require_once '../config/db.php';
 require_once '../includes/session-check.php';
 
 header("Content-Type: application/json");
-$current_id = $_SESSION['user_id'];
+$current_id = $currentUser['id'];
 $query_search = isset($_GET['query']) ? trim($_GET['query']) : '';
 
 try {
+    $base = "SELECT id, nom, prenom, photo_profil AS avatar FROM users
+              WHERE id != :current_id
+              AND id NOT IN (
+                  SELECT receiver_id FROM friendships WHERE sender_id = :current_id
+                  UNION
+                  SELECT sender_id FROM friendships WHERE receiver_id = :current_id
+              )";
+    $params = [':current_id' => $current_id];
+
     if (!empty($query_search)) {
-        $sql = "SELECT id, nom, prenom, avatar FROM users 
-                WHERE id != :current_id AND (nom LIKE :q OR prenom LIKE :q)
-                AND id NOT IN (
-                    SELECT user_id_1 FROM friendships WHERE user_id_2 = :current_id
-                    UNION
-                    SELECT user_id_2 FROM friendships WHERE user_id_1 = :current_id
-                ) LIMIT 15";
-        $stmt = $pdo->prepare($sql);
-        $search_param = "%" . $query_search . "%";
-        $stmt->bindParam(':q', $search_param);
+        $sql = $base . " AND (nom LIKE :q OR prenom LIKE :q) LIMIT 15";
+        $params[':q'] = "%$query_search%";
     } else {
-        $sql = "SELECT id, nom, prenom, avatar FROM users 
-                WHERE id != :current_id 
-                AND id NOT IN (
-                    SELECT user_id_1 FROM friendships WHERE user_id_2 = :current_id
-                    UNION
-                    SELECT user_id_2 FROM friendships WHERE user_id_1 = :current_id
-                ) ORDER BY id DESC LIMIT 10";
-        $stmt = $pdo->prepare($sql);
+        $sql = $base . " ORDER BY id DESC LIMIT 10";
     }
-    $stmt->bindParam(':current_id', $current_id, PDO::PARAM_INT);
-    $stmt->execute();
-    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    echo json_encode(["success" => true, "users" => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(["message" => $e->getMessage()]);
+    error_log('Erreur search: ' . $e->getMessage());
+    echo json_encode(["success" => false, "error" => "Erreur serveur."]);
 }
