@@ -28,7 +28,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         echo json_encode(['success' => false, 'message' => 'Image trop volumineuse (max 5 Mo).']);
         exit;
     }
-
+// Génération d'un nom unique pour l'image
     $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $image_name = 'post_' . $current_user_id . '_' . time() . '.' . $extension;
     $uploadDir = '../../assets/images/posts/';

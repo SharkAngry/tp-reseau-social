@@ -98,7 +98,7 @@ function createArticleHtml(article) {
         </div>
     `;
 }
-
+// Function to handle like/dislike reactions
 async function handleReaction(articleId, type) {
   try {
     const data = await apiRequest("articles/like-article.php", "POST", {
