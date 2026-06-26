@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS reseau_social CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE reseau_social CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE reseau_social;
 
 CREATE TABLE users (
@@ -7,7 +7,7 @@ CREATE TABLE users (
     prenom VARCHAR(50) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    photo_profil VARCHAR(255) DEFAULT 'default-avatar.png',
+    photo_profil VARCHAR(255) DEFAULT NULL,
     session_token VARCHAR(255) DEFAULT NULL,
     reset_token VARCHAR(255) DEFAULT NULL,
     reset_token_expires DATETIME DEFAULT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE friendships (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
-    status ENUM('pending','accepted','refused') NOT NULL DEFAULT 'pending',
+    status ENUM('pending','accepted') NOT NULL DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY unique_pair (sender_id, receiver_id),
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,

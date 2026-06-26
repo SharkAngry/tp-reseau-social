@@ -60,7 +60,7 @@ async function loadArticles() {
 }
 
 function createArticleHtml(article) {
-  const avatar = article.photo_profil || "default-avatar.png";
+  const avatar = article.photo_profil || "assets/images/default-avatar.png";
   const imageHtml = article.image
     ? `<img src="assets/images/posts/${article.image}" class="post-image">`
     : "";
@@ -71,7 +71,7 @@ function createArticleHtml(article) {
   return `
         <div class="post-card" id="post-${article.id}">
             <div class="post-header">
-                <img src="assets/images/avatars/${avatar}" class="avatar-sm">
+                <img src="${avatar}" class="avatar-sm">
                 <div>
                     <h4>${article.prenom} ${article.nom}</h4>
                     <span class="post-date">${new Date(article.created_at).toLocaleString("fr-FR")}</span>

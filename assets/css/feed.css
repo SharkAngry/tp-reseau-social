@@ -1,46 +1,131 @@
+#add-article-form,
+.post-card {
+  max-width: 560px;
+  margin: 0 auto 16px;
+  background: var(--card-bg);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+#articles-flux {
+  padding: 16px 0 40px;
+}
+
+#add-article-form textarea,
+#article-description {
+  resize: vertical;
+  min-height: 70px;
+}
+
+#file-name-preview {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+  margin: -6px 0 10px;
+}
+
+#add-article-form button[type="submit"] {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-header h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.post-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.post-description {
+  margin: 8px 0 12px;
+  line-height: 1.45;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.post-actions button {
+  background: var(--bg);
+  color: var(--text);
+  padding: 7px 14px;
+  font-size: 14px;
+}
+
 .btn-like.active-like {
-  color: #1877f2 !important; /* Devient bleu */
+  background: var(--primary);
+  color: white;
 }
-/* Feed styles */
-.feed-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.feed-container h1 {
-  color: #1877f2;
-  margin-bottom: 2rem;
+.btn-dislike.active-dislike {
+  background: var(--danger);
+  color: white;
 }
 
-/* Profile styles */
-.profile-container {
-  max-width: 800px;
-  margin: 0 auto;
+.comments-area {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
 }
 
-.profile-container h1 {
-  color: #1877f2;
-  margin-bottom: 2rem;
+.comment-bubble {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
-/* Friends styles */
-.friends-container {
-  max-width: 800px;
-  margin: 0 auto;
+.comment-content {
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 13.5px;
 }
 
-.friends-container h1 {
-  color: #1877f2;
-  margin-bottom: 2rem;
+.comment-author {
+  display: block;
+  font-weight: 700;
+  font-size: 12.5px;
 }
 
-/* Chat styles */
-.chat-container {
-  max-width: 800px;
-  margin: 0 auto;
+.comment-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.chat-container h1 {
-  color: #1877f2;
-  margin-bottom: 2rem;
+.comment-form input {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.comment-form button {
+  background: var(--primary);
+  color: white;
+  padding: 0 16px;
+}
+
+.loading-text {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 13px;
 }
