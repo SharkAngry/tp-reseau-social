@@ -4,8 +4,7 @@
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 require '../config/db.php';
-
-// Récupération de l'ID de l'utilisateur connecté via les en-têtes HTTP
+// Récupération de l'ID utilisateur connecté via les en-têtes HTTP
 $headers = getallheaders();
 $current_user_id = isset($headers['X-User-Id']) ? intval($headers['X-User-Id']) : null;
 
@@ -62,7 +61,7 @@ try {
 
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode([
+    echo json_encode ([
         'success' => false,
         'message' => 'Erreur lors du traitement du like : ' . $e->getMessage()
     ]);

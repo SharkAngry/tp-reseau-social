@@ -7,7 +7,7 @@ function initPublishForm() {
 
     if (!form) return;
 
-    // Petite touche UX pour afficher le nom de l'image sélectionnée
+    // Petite touche UX pour afficher le nom de l'image 
     fileInput.addEventListener("change", () => {
         if (fileInput.files.length > 0) {
             filePreview.textContent = fileInput.files[0].name;
