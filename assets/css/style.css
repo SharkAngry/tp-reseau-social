@@ -38,6 +38,12 @@ button:hover {
   opacity: 0.85;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -47,8 +53,17 @@ textarea {
   padding: 10px 12px;
   margin-bottom: 12px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
+  font-family: inherit;
   font-size: 14px;
+  color: var(--text);
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
 }
 
 /* ===== Navbar ===== */
