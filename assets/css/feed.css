@@ -1,3 +1,46 @@
 .btn-like.active-like {
-    color: #1877f2 !important; /* Devient bleu */
+  color: #1877f2 !important; /* Devient bleu */
+}
+/* Feed styles */
+.feed-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.feed-container h1 {
+  color: #1877f2;
+  margin-bottom: 2rem;
+}
+
+/* Profile styles */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-container h1 {
+  color: #1877f2;
+  margin-bottom: 2rem;
+}
+
+/* Friends styles */
+.friends-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.friends-container h1 {
+  color: #1877f2;
+  margin-bottom: 2rem;
+}
+
+/* Chat styles */
+.chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chat-container h1 {
+  color: #1877f2;
+  margin-bottom: 2rem;
 }
