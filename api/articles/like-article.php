@@ -2,7 +2,7 @@
 header('Content-Type: application/json; charset=UTF-8');
 require '../config/db.php';
 require '../includes/session-check.php';
-
+// Vérification de l'authentification
 $current_user_id = $currentUser['id'];
 $data = json_decode(file_get_contents('php://input'), true);
 $article_id = isset($data['article_id']) ? intval($data['article_id']) : null;
@@ -13,7 +13,7 @@ if (!$article_id || !in_array($type, ['like', 'dislike'])) {
     echo json_encode(['success' => false, 'message' => 'Données invalides.']);
     exit;
 }
-
+// verification des articles existants
 try {
     $stmt = $pdo->prepare("SELECT type FROM reactions WHERE user_id = ? AND article_id = ?");
     $stmt->execute([$current_user_id, $article_id]);

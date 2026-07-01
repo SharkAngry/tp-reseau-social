@@ -31,7 +31,7 @@ async function loadSuggestions(searchQuery = "") {
         : "";
     data.users.forEach((user) => {
       el.innerHTML += `<div class="user-card">
-                <img src="assets/images/avatars/${user.avatar || "default.png"}" class="avatar-sm">
+                <img src="${user.avatar || "assets/images/default-avatar.png"}" class="avatar-sm">
                 <h4>${user.prenom} ${user.nom}</h4>
                 <div class="card-actions"><button class="btn-action btn-add" onclick="handleFriendAction('send', ${user.id})">Ajouter</button></div>
             </div>`;
@@ -52,7 +52,7 @@ async function loadInvitations() {
         : "";
     data.invitations.forEach((invite) => {
       el.innerHTML += `<div class="user-card alert-card">
-                <img src="assets/images/avatars/${invite.avatar || "default.png"}" class="avatar-sm">
+                <img src="${invite.avatar || "assets/images/default-avatar.png"}" class="avatar-sm">
                 <h4>${invite.prenom} ${invite.nom}</h4>
                 <div class="card-actions">
                     <button class="btn-action btn-accept" onclick="handleFriendAction('accept', ${invite.id})">Accepter</button>
@@ -76,7 +76,7 @@ async function loadFriendsList() {
         : "";
     data.friends.forEach((friend) => {
       el.innerHTML += `<div class="user-card">
-                <img src="assets/images/avatars/${friend.avatar || "default.png"}" class="avatar-sm">
+                <img src="${friend.avatar || "assets/images/default-avatar.png"}" class="avatar-sm">
                 <h4>${friend.prenom} ${friend.nom}</h4>
                 <div class="card-actions"><button class="btn-action btn-remove" onclick="handleFriendAction('remove', ${friend.id})">Retirer</button></div>
             </div>`;

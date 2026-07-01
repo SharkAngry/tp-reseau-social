@@ -12,9 +12,8 @@ async function initProfilePage() {
 
   document.getElementById("profile-nom").value = user.nom;
   document.getElementById("profile-prenom").value = user.prenom;
-  document.getElementById("profile-photo-preview").src = user.photo_profil
-    ? `${API_BASE.replace("/api", "")}/${user.photo_profil}`
-    : "assets/images/default-avatar.png";
+  document.getElementById("profile-photo-preview").src =
+    user.photo_profil || "assets/images/default-avatar.png";
 
   document
     .getElementById("profile-photo-input")

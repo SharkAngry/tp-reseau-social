@@ -55,7 +55,7 @@ async function handleCommentSubmit(event, articleId) {
 function createCommentHtml(comment) {
   return `
         <div class="comment-bubble">
-            <img src="assets/images/avatars/${comment.photo_profil || "default-avatar.png"}" class="avatar-xs">
+            <img src="${comment.photo_profil || "assets/images/default-avatar.png"}" class="avatar-xs">
             <div class="comment-content">
                 <span class="comment-author">${comment.prenom} ${comment.nom}</span>
                 <span class="comment-text">${comment.contenu}</span>
