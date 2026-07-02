@@ -140,6 +140,10 @@
             return fetch('../../api/admin/' + endpoint, options).then(r => r.json());
         }
 
+        function isApiSuccess(data) {
+            return data?.success === true || data?.status === 'success';
+        }
+
         function showSection(name, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -163,7 +167,7 @@
 
         async function loadStats() {
             const data = await adminRequest('stats.php');
-            if (data.success) {
+            if (isApiSuccess(data)) {
                 document.getElementById('stat-users').textContent    = data.stats.users;
                 document.getElementById('stat-articles').textContent = data.stats.articles;
                 document.getElementById('stat-messages').textContent = data.stats.messages;
@@ -173,7 +177,7 @@
         async function loadArticles() {
             const data = await adminRequest('get-articles.php');
             const tbody = document.getElementById('tbody-articles');
-            if (!data.success) { tbody.innerHTML = '<tr><td colspan="4">Erreur.</td></tr>'; return; }
+            if (!isApiSuccess(data)) { tbody.innerHTML = '<tr><td colspan="4">Erreur.</td></tr>'; return; }
             tbody.innerHTML = data.articles.map(a => `
                 <tr>
                     <td>${a.prenom} ${a.nom}</td>
@@ -186,14 +190,14 @@
         async function deleteArticle(id) {
             if (!confirm('Supprimer cet article ?')) return;
             const data = await adminRequest('delete-article.php', 'POST', { id });
-            if (data.success) loadArticles();
+            if (isApiSuccess(data)) loadArticles();
             else alert(data.error);
         }
 
         async function loadUsers() {
             const data = await adminRequest('get-users.php');
             const tbody = document.getElementById('tbody-users');
-            if (!data.success) { tbody.innerHTML = '<tr><td colspan="4">Erreur.</td></tr>'; return; }
+            if (!isApiSuccess(data)) { tbody.innerHTML = '<tr><td colspan="4">Erreur.</td></tr>'; return; }
             tbody.innerHTML = data.users.map(u => `
                 <tr>
                     <td>${u.prenom} ${u.nom}</td>
@@ -206,14 +210,14 @@
         async function deleteUser(id) {
             if (!confirm('Supprimer cet utilisateur et tout son contenu ?')) return;
             const data = await adminRequest('delete-user.php', 'POST', { id });
-            if (data.success) { loadUsers(); loadStats(); }
+            if (isApiSuccess(data)) { loadUsers(); loadStats(); }
             else alert(data.error);
         }
 
         async function loadMods() {
             const data = await adminRequest('manage-moderateurs.php');
             const tbody = document.getElementById('tbody-mods');
-            if (!data.success) { tbody.innerHTML = '<tr><td colspan="5">Erreur.</td></tr>'; return; }
+            if (!isApiSuccess(data)) { tbody.innerHTML = '<tr><td colspan="5">Erreur.</td></tr>'; return; }
             tbody.innerHTML = data.moderateurs.map(m => `
                 <tr>
                     <td>${m.nom}</td>
@@ -231,14 +235,14 @@
             const role     = document.getElementById('mod-role').value;
             if (!nom || !email || !password) { alert('Remplis tous les champs'); return; }
             const data = await adminRequest('manage-moderateurs.php', 'POST', { action: 'add', nom, email, password, role });
-            if (data.success) { loadMods(); document.getElementById('mod-nom').value = ''; document.getElementById('mod-email').value = ''; document.getElementById('mod-password').value = ''; }
+            if (isApiSuccess(data)) { loadMods(); document.getElementById('mod-nom').value = ''; document.getElementById('mod-email').value = ''; document.getElementById('mod-password').value = ''; }
             else alert(data.error);
         }
 
         async function deleteMod(id) {
             if (!confirm('Supprimer ce compte ?')) return;
             const data = await adminRequest('manage-moderateurs.php', 'POST', { action: 'delete', id });
-            if (data.success) loadMods();
+            if (isApiSuccess(data)) loadMods();
             else alert(data.error);
         }
 
