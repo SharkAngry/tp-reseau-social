@@ -43,9 +43,9 @@
                 const response = await apiRequest("admin/login.php", "POST", { email, password });
 
                 if (response.status === "success") {
-                   sessionStorage.setItem('admin_token', data.token);
-                    sessionStorage.setItem('admin_role', data.role);
-                    sessionStorage.setItem('admin_nom', data.nom);
+                   sessionStorage.setItem('admin_token', response.token);
+                    sessionStorage.setItem('admin_role', response.role);
+                    sessionStorage.setItem('admin_nom', response.nom);
                     window.location.href = 'dashboard.php';
                 } else {
                     errorBox.innerText     = response.message || "Identifiants incorrects.";
