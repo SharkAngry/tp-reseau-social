@@ -1,6 +1,8 @@
 <?php
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
+
+require_once '../includes/admin-check.php';
+// $currentAdmin est maintenant disponible
 
 // On remonte de deux niveaux pour atteindre le fichier de configuration centralisé
 require_once '../config/db.php';

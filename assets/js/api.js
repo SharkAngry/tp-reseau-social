@@ -1,5 +1,4 @@
-const API_BASE = "http://localhost/tp-reseau-social/api";
-
+const API_BASE = "http://localhost/projet-reseau-social/api";
 async function apiRequest(
   endpoint,
   method = "GET",

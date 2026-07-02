@@ -52,15 +52,17 @@ async function loadFriendsInSidebar() {
       div.style.cssText =
         "display:flex; align-items:center; gap:10px; padding:12px 15px; cursor:pointer; border-bottom:1px solid #eee; transition:background 0.2s;";
       div.innerHTML = `
-        <img src="assets/images/profiles/${avatar}" 
-             onerror="this.src='assets/image/default-avatar.png'"
+        <img src="${friend.avatar || "assets/images/default-avatar.png"}"
              style="width:42px; height:42px; border-radius:50%; object-fit:cover;">
         <span style="font-weight:500; color:#1c1e21;">${friend.prenom} ${friend.nom}</span>
       `;
-      div.addEventListener("mouseover", () => (div.style.background = "#f0f2f5"));
+      div.addEventListener(
+        "mouseover",
+        () => (div.style.background = "#f0f2f5"),
+      );
       div.addEventListener("mouseout", () => (div.style.background = ""));
       div.addEventListener("click", () =>
-        startChatWithUser(friend.id, `${friend.prenom} ${friend.nom}`)
+        startChatWithUser(friend.id, `${friend.prenom} ${friend.nom}`),
       );
       list.appendChild(div);
     });
@@ -78,7 +80,7 @@ async function loadChatMessages() {
   try {
     const data = await apiRequest(
       `chat/get_messages.php?receiver_id=${currentReceiverId}`,
-      "GET"
+      "GET",
     );
 
     if (data.status === "success") {
@@ -126,9 +128,8 @@ async function loadChatMessages() {
 function startChatWithUser(receiverId, receiverName) {
   currentReceiverId = receiverId;
 
-  document.getElementById(
-    "chat-active-user-header"
-  ).innerText = `Discussion avec ${receiverName}`;
+  document.getElementById("chat-active-user-header").innerText =
+    `Discussion avec ${receiverName}`;
   document.getElementById("chat-receiver-id").value = receiverId;
   document.getElementById("chat-messages-box").innerHTML =
     "<p style='text-align:center; color:#999; margin-top:20px;'>Chargement des messages...</p>";
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "chat/send_message.php",
         "POST",
         formData,
-        true
+        true,
       );
       if (response.status === "success") {
         messageInput.value = "";
